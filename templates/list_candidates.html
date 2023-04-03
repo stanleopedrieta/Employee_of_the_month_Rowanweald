@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Nominees for Employee of the Month</h1>
+<form  method="POST">
+{{ form.hidden_tag() }}
+{{ form.year.label(class="form-label") }} {{form.year}}
+{{ form.month.label(class="form-label") }} {{form.month}}
+&nbsp;
+{{ form.submit(class="btn btn-primary") }}
+{{ form.report_type() }}
+</form>
+{% if everyone %}
+
+    {% if report == 'summary' %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Vote Count</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for name, count in everyone.items() %}
+            <tr>
+
+                <td>{{ name }}</td>
+                <td>{{ count }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h3>Summary</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Vote Count</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for name, count in everyone.items() %}
+            <tr>
+
+                <td>{{ name }}</td>
+                <td>{{ count }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <br>
+        <h3>Details</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Voted By:</th>
+                <th>Nominee</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for name in query %}
+            <tr>
+
+                <td>{{ name.id }}</td>
+                <td>{{ name.year_month }}</td>
+                <td>{{ name.voted_by }}</td>
+                <td>{{ name.candidate_id }}</td>
+            </tr>
+
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    {% endif %}
+{% else %}
+<h4>No results!</h4>
+{% endif %}
+{% endblock %}
+{% block footer %}
+<br><br><br><br><br><br><br><br><br>
+<div class="container-m footer">
+  <footer class="py-3 my-4" style="position: fixed; left: 0; bottom: 0; width: 100%; text-align: center;">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+
+    </ul>
+    <p class="text-center text-body-secondary">&copy; 2023 Stan Leo Brian Pedrieta All rights reserved.</p>
+  </footer>
+</div>
+{% endblock %}

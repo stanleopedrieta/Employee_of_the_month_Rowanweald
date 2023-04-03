@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Employee List</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for employee in everyone %}
+    <tr>
+        <td>{{employee.id}}</td>
+        <td>{{employee.name}}</td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{% block footer %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="container-m footer">
+  <footer class="py-3 my-4" style="position: fixed; left: 0; bottom: 0; width: 100%; text-align: center;">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+
+    </ul>
+    <p class="text-center text-body-secondary">&copy; 2023 Stan Leo Brian Pedrieta All rights reserved.</p>
+  </footer>
+</div>
+{% endblock %}
