@@ -9,12 +9,14 @@
     </tr>
     </thead>
     <tbody>
+    {% set count = namespace(value=1) %}
     {% for employee in everyone %}
     <tr>
-        <td>{{employee.id}}</td>
+        <td>{{count.value}}</td>
         <td>{{employee.name}}</td>
 
     </tr>
+    {% set count.value = count.value + 1 %}
     {% endfor %}
     </tbody>
 </table>

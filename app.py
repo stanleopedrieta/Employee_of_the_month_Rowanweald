@@ -104,14 +104,14 @@ def home():
 def index():
     form = VotingForm()
     employee_list = [('', '')]
-    all_employee = Employees.query.all()
+    all_employee = Employees.query.order_by("name").all()
     for emp_name in all_employee:
         name_tuple = (emp_name.name, emp_name.name)
         employee_list.append(name_tuple)
     form.candidate.choices = employee_list
 
     no_vote_list = [('', '')]
-    all_employee = Employees.query.all()
+    all_employee = Employees.query.order_by("name").all()
     for emp_name in all_employee:
         if int(emp_name.month_voted[0:4]) == int(datetime.now().strftime('%Y')):
             if int(emp_name.month_voted[5:8]) < int(datetime.now().strftime('%m')):
@@ -168,7 +168,7 @@ def delete_employee():
     title = 'Delete Employee'
     form = DeleteForm()
     employee_list = [(' ', ' ')]
-    all_employee = Employees.query.all()
+    all_employee = Employees.query.order_by("name").all()
     for emp_name in all_employee:
         name_tuple = (emp_name.name, emp_name.name)
         employee_list.append(name_tuple)
@@ -184,7 +184,7 @@ def delete_employee():
 @app.route('/admin/list')
 def list_employee():
     title = 'List Employee'
-    everyone = Employees.query.all()
+    everyone = Employees.query.order_by("name").all()
     return render_template('list_emp.html', title=title, everyone=everyone)
 
 @app.route('/admin/list_candidates', methods=['GET','POST'])
